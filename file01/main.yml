@@ -1,0 +1,38 @@
+name: Auto IP Collector
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *' # every 4 hours
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install requests beautifulsoup4
+          sT=$(TZ=UTC-8 date +'%S')
+          echo "update_version=$(TZ=UTC-8 date +'%Y-%m-%d %H:%M'):${sT}" >> ${GITHUB_ENV}
+
+      - name: 🧠 Run IP collector script
+        run: |
+          python collects.py
+
+      - name: 📤 Commit and push IP results
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add ipv4.txt ipv6.txt
+          git diff --cached --quiet || git commit -m "Updated at ${update_version}"
+          git push
