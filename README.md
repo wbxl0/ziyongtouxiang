@@ -2,7 +2,7 @@
 
 #**列表**
 * 1：路飞
-![太阳神] (https://github.com/wbxl0/ziyongtouxiang/blob/main/file01/%E8%B7%AF%E9%A3%9E.jpg?raw=true)
+![太阳神](https://github.com/wbxl0/ziyongtouxiang/blob/main/file01/%E8%B7%AF%E9%A3%9E.jpg?raw=true)
   
 * 2：鹰眼
 ![十字](https://github.com/wbxl0/ziyongtouxiang/blob/main/file01/%E9%B9%B0%E7%9C%BC.png?raw=true)
